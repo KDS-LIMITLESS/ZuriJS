@@ -5,9 +5,11 @@ fetch("https://jsonplaceholder.typicode.com/posts")
     .then(res => res.json())
     .then(text => {
       let data = JSON.stringify(text, null, 2)
-      fs.writeFile('result/posts.json', data, function(err){
-        if (err) throw err;
-        console.log("saved")
-      });
+      if (fs.existsSync('result/posts.json')){
+        console.log("Found File")
+        fs.writeFile('result/posts.json', data, function(err){
+          if (err) throw err;
+          console.log("saved")
+        });
+      };
     });
- 
